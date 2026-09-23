@@ -1,3 +1,4 @@
+import {useNavbar} from 'react-router';
 function Dashboard() {
   return (
     <div>
