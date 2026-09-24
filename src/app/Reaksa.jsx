@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
-import Layout from "../components/Layout.jsx";
+import Layout from "../components/MainLayout.jsx";
 import Navbar from '../components/Navbar.jsx';
 import Sidebar from '../components/Sidebar.jsx';
 import Dashboard from '../pages/Dashboard.jsx';
