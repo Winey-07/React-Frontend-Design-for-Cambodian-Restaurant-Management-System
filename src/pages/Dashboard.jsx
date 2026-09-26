@@ -1,8 +1,26 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
-import MainLayout from "../components/MainLayout.jsx";
+import MainLayout from "../layouts/MainLayout.jsx";
 import StatusBadge from "../components/StatusBadge.jsx";
-import Sidebar from "../components/Sidebar.jsx";
+
+const getDashboardSummary = () =>
+  Promise.resolve({
+    todaySales: 150,
+    todayOrders: 10,
+    pendingOrders: 2,
+    avaibleTables: 10,
+  });
+const getRecentOrders = () =>
+  Promise.resolve([
+    { id: 101, table: "Table 3", total: 45.0, status: "Pending" },
+    { id: 102, table: "Table 1", total: 28.5, status: "Completed" },
+  ]);
+
+const getPopularItems = () =>
+  Promise.resolve([
+    { id: 1, name: "Burger", category: "Fast Food", price: 12.99 },
+    { id: 2, name: "Pizza", category: "Fast Food", price: 15.99 },
+  ]);
 
 function Dashboard() {
   // memory box
@@ -18,16 +36,16 @@ function Dashboard() {
 
   //  useEffect: fetching data when the page loads
   useEffect(() => {
-    const loadDashbord = async () => {
+    const loadDashboard = async () => {
       try {
         // useful for re-run this function later
         setLoading(true);
         // this fires all 3 requests at the same time and waits for them to finish
         const [summaryDate, ordersDate, popularDate] = await Promise.all([
           // these 3 are called at the same time
-          getDashboardSummary({todaySales: 150, todayOrders: 5, pendingOrders: 2, availableTables: 10}),
-          getRecentOrders({ id: 101, table: "Table 3", total: 45.00, status: "Pending" }),
-          getPopularItems({ id: 1, name: "Burger", category: "Fast Food", price: 12.99 }),
+          getDashboardSummary(),
+          getRecentOrders(),
+          getPopularItems(),
           // promise.all wait for the 3 to finish
           // once they finish, their results are unpacked into summaryData, ordersData, and popularData.
         ]);
@@ -35,12 +53,10 @@ function Dashboard() {
         // Use when fetching API
         // These lines pin the fetched data into the memory boxes (state).
         // Once these are called, React knows the data changed and will re-render the page to show it.
-        // setSummary(summaryDate);
-        // setRecentOrders(ordersDate);
-        // setPopularFood(popularDate);
-        // setError(null);
-
-
+        setSummary(summaryDate);
+        setRecentOrders(ordersDate);
+        setPopularFood(popularDate);
+        setError(null);
       } catch (err) {
         setError("Failed to load dashboard.");
       } finally {
@@ -49,7 +65,7 @@ function Dashboard() {
         setLoading(false);
       }
     };
-    loadDashbord();
+    loadDashboard();
   }, []);
   // Loading state
   if (loading) {
