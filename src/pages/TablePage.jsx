@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Row, Col, Modal, Typography, List, Tag } from "antd";
-import TableCard from "../components/TableCard.jsx";
+import TableCard from "../components/Card.jsx";
 
 const { Title, Text } = Typography;
 

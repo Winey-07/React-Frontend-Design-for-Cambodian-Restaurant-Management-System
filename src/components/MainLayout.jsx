@@ -13,7 +13,7 @@ function MainLayout() {
     "/": ["Dashboard"],
     "/Dashbord": ["Dashboard"],
     "/order": ["Orders"],
-    "/tables": ["Tables"],
+    "/table": ["Tables"],
     "/order/createOrder": ["Create Order"],
     "/menu": ["Menu"],
     "/category": ["Categories"],
