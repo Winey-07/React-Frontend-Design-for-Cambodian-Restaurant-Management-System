@@ -10,6 +10,7 @@ import {
   CreditCardOutlined,
   BarChartOutlined,
   LogoutOutlined,
+  EyeOutlined,
 } from "@ant-design/icons";
 
 function Navigation({ isCollapsed }) {
@@ -28,6 +29,11 @@ function Navigation({ isCollapsed }) {
           key: "/order/create-order",
           icon: <PlusOutlined />,
           label: "Create Order",
+        },
+        {
+          key: "/order/:id",
+          icon: <EyeOutlined/>,
+          label: "Order detail ",
         },
       ],
     },
