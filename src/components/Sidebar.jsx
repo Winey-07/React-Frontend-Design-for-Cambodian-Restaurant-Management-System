@@ -1,14 +1,15 @@
 import { useLocation, useNavigate } from "react-router";
 import { Menu } from "antd";
 import {
-  AppstoreOutlined,
   HomeOutlined,
   PlusCircleOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  UserOutlined,
   PlusOutlined,
-  // AntDesignOutlined,
+  TableOutlined,
+  CoffeeOutlined,
+  AppstoreOutlined,
+  CreditCardOutlined,
+  BarChartOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
 
 function Navigation({ isCollapsed }) {
@@ -16,73 +17,36 @@ function Navigation({ isCollapsed }) {
   const navigate = useNavigate();
 
   const menuItems = [
+    { key: "/", icon: <HomeOutlined />, label: "Dashboard" },
     {
-      key: "/",
-      icon: <HomeOutlined />,
-      label: "Dashboard",
-    },
-    {
-      key: "/Dashboard",
-      icon: <AppstoreOutlined />,
-      label: "Dashboard",
-    },
-    {
-      key: "/order",
+      key: "orders-group",
       icon: <PlusCircleOutlined />,
       label: "Orders",
-    },
-    {
-      key: "/table",
-      icon: <PlusOutlined />,
-      label: "Table",
-    },
-
-    {
-      key: "order",
-      icon: <TeamOutlined />,
-      label: "Orders",
       children: [
+        { key: "/order", icon: <PlusCircleOutlined />, label: "All Orders" },
         {
-          key: "/order/createOrder",
-          icon: <UserOutlined />,
+          key: "/order/create-order",
+          icon: <PlusOutlined />,
           label: "Create Order",
         },
       ],
     },
-        {
-      key: "/menu",
-      icon: <UserOutlined />,
-      label: "Menu",
-    },
-    {
-      key: "/category",
-      icon: <ShopOutlined />,
-      label: "Categories",
-    },
-    {
-      key: "/payment",
-      icon: <ShopOutlined />,
-      label: "Payments",
-    },
-    {
-      key: "/report",
-      icon: <ShopOutlined />,
-      label: "Reports",
-    },
-    {
-      key: "/log-in",
-      icon: <ShopOutlined />,
-      label: "Log Out",
-    },
+    { key: "/table", icon: <TableOutlined />, label: "Tables" },
+    { key: "/menu", icon: <CoffeeOutlined />, label: "Menu" },
+    { key: "/category", icon: <AppstoreOutlined />, label: "Categories" },
+    { key: "/payment", icon: <CreditCardOutlined />, label: "Payments" },
+    { key: "/report", icon: <BarChartOutlined />, label: "Reports" },
+    { key: "logout", icon: <LogoutOutlined />, label: "Log Out", danger: true },
   ];
 
-  // Find active key based on current pathname
   const activeKey = location.pathname;
 
   const handleMenuClick = ({ key }) => {
-    if (key.startsWith("/")) {
-      navigate(key);
+    if (key === "logout") {
+      navigate("/log-out");
+      return;
     }
+    if (key.startsWith("/")) navigate(key);
   };
 
   return (
@@ -99,7 +63,7 @@ function Navigation({ isCollapsed }) {
         theme="dark"
         mode="inline"
         selectedKeys={[activeKey]}
-        defaultOpenKeys={["team-group"]}
+        defaultOpenKeys={["orders-group"]}
         items={menuItems}
         onClick={handleMenuClick}
         style={{ borderRight: 0, background: "transparent" }}

@@ -1,10 +1,18 @@
-import { StrictMode } from 'react' // the brain
-import { createRoot } from 'react-dom/client' // the browser
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from "react"; // the brain
+import { createRoot } from "react-dom/client"; // the browser
+import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router";
+import { ConfigProvider, App as AntdApp } from "antd";
+// import './index.css'
+import App from "./App.jsx";
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <ConfigProvider>
+      <AntdApp>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </AntdApp>
+    </ConfigProvider>
   </StrictMode>,
-)
+);

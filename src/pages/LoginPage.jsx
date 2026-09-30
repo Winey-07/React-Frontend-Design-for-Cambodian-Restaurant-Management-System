@@ -7,7 +7,8 @@ const onFinishFailed = errorInfo => {
   console.log('Failed:', errorInfo);
 };
 const LoginPage = () => (
-  <Form
+  <form >
+    <Form
     name="basic"
     labelCol={{ span: 8 }}
     wrapperCol={{ span: 16 }}
@@ -43,5 +44,6 @@ const LoginPage = () => (
       </Button>
     </Form.Item>
   </Form>
+  </form>
 );
 export default LoginPage;
