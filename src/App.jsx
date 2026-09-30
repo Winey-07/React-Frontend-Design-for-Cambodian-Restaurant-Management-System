@@ -7,6 +7,7 @@ import CategoriesPage from "./pages/CategoriesPage.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import MenuPage from "./pages/MenuPage.jsx";
 import "./index.css";
+import OrderPage from "./pages/OrderPage.jsx";
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/category" element={<CategoriesPage />} />
         <Route path="/menu" element={<MenuPage />} />
+        <Route path="/orders-group" element={<OrderLayout />} />
+          <Route path="/Orders" element={<OrderPage />} />
+          {/* <Rout /> */}
+        <Route />
       </Route>
     </Routes>
   );
