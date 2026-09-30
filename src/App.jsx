@@ -10,6 +10,7 @@ import TablePage from "./pages/TablePage.jsx";
 import ReportPage from "./pages/ReportPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import "./index.css";
+import OrderPage from "./pages/OrderPage.jsx";
 
 function App() {
   return (
@@ -20,9 +21,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/category" element={<CategoriesPage />} />
         <Route path="/menu" element={<MenuPage />} />
-        <Route path="/table" element={<TablePage/>}/>
+        <Route path="/table" element={<TablePage/>} />
         <Route path="/report" element={<ReportPage/>}/>
-        
       </Route>
       
     </Routes>
