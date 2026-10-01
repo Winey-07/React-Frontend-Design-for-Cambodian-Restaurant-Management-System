@@ -20,12 +20,10 @@ function App() {
       {/* Login */}
       <Route path="/" element={<LoginPage />} />
 
-      {/* Main Layout */}
+      {/* Main Layout Wraps All Authenticated Routes */}
       <Route element={<MainLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
-
         <Route path="/category" element={<CategoriesPage />} />
-
         <Route path="/menu" element={<MenuPage />} />
 
         {/* Order Routes */}
@@ -36,18 +34,9 @@ function App() {
               <p>Select All Order or Create Order from the sidebar.</p>
             }
           />
-
           <Route path="order" element={<OrderPage />} />
-
-          <Route
-            path="create-order"
-            element={<CreateOrderPage />}
-          />
-
-          <Route
-            path="order/:id"
-            element={<OrderDetailPage />}
-          />
+          <Route path="order/create-order" element={<CreateOrderPage />} />
+          <Route path="order/:id" element={<OrderDetailPage />} />
         </Route>
       </Route>
     </Routes>

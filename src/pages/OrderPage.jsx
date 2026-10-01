@@ -1,78 +1,89 @@
-
 import { Flex, Space, Table, Tag } from 'antd';
-function OrderPage(){
-    
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: text => <a>{text}</a>,
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (_, { tags }) => (
-      <Flex gap="small" align="center" wrap>
-        {tags.map(tag => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'kawaii') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </Flex>
-    ),
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space size="medium">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
-  },
-];
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['kawaii'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sydney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
-const App = () => <Table columns={columns} dataSource={data} />;
+
+function OrderPage() {
+  const columns = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id',
+      render: (id) => <a href={`#${id}`}>{id}</a>,
+    },
+    {
+      title: 'Date',
+      dataIndex: 'date',
+      key: 'date',
+    },
+    {
+      title: 'Table Number',
+      dataIndex: 'tableNumber',
+      key: 'tableNumber',
+    },
+    {
+      title: 'Total Amount',
+      dataIndex: 'totalAmount',
+      key: 'totalAmount',
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      render: (status = []) => (
+        <Flex gap="small" align="center" wrap>
+          {status.map((tag) => {
+            let color = tag.length > 5 ? 'geekblue' : 'green';
+            if (tag === 'pending') {
+              color = 'volcano';
+            }
+            return (
+              <Tag color={color} key={tag}>
+                {tag.toUpperCase()}
+              </Tag>
+            );
+          })}
+        </Flex>
+      ),
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Space size="middle">
+          <a onClick={()=>onViewDetail(record.id)}>View</a>
+          <a href={`#edit-${record.id}`}>Edit</a>
+          <a href="#delete">Delete</a>
+        </Space>
+      ),
+    },
+  ];
+
+  const data = [
+    {
+      key: '1',
+      id: 'ORD-001',
+      date: '2026-03-30',
+      tableNumber: 'Table 5',
+      totalAmount: '$45.00',
+      status: ['completed'],
+    },
+    {
+      key: '2',
+      id: 'ORD-002',
+      date: '2026-03-31',
+      tableNumber: 'Table 12',
+      totalAmount: '$120.50',
+      status: ['pending'],
+    },
+    {
+      key: '3',
+      id: 'ORD-003',
+      date: '2026-03-31',
+      tableNumber: 'Table 2',
+      totalAmount: '$32.00',
+      status: ['in-progress'],
+    },
+  ];
+
+  return <Table columns={columns} dataSource={data} />;
 }
-export default OrderPage
+
+export default OrderPage;

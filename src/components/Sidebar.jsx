@@ -24,15 +24,18 @@ function Navigation({ isCollapsed }) {
       icon: <PlusCircleOutlined />,
       label: "Orders",
       children: [
-        { key: "/order", icon: <PlusCircleOutlined />, label: "All Orders" },
+        { key: "/orders-group/order", 
+          icon: <PlusCircleOutlined />, 
+          label: "All Orders" 
+        },
         {
-          key: "/order/create-order",
+          key: "/orders-group/order/create-order",
           icon: <PlusOutlined />,
           label: "Create Order",
         },
         {
-          key: "/order/:id",
-          icon: <EyeOutlined/>,
+          key: "/orders-group/order/:id",
+          icon: <EyeOutlined />,
           label: "Order detail ",
         },
       ],
