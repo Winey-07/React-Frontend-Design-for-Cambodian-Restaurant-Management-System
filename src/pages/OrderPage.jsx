@@ -50,7 +50,7 @@ function OrderPage() {
         <Space size="middle">
           <a onClick={()=>onViewDetail(record.id)}>View</a>
           <a href={`#edit-${record.id}`}>Edit</a>
-          <a href="#delete">Delete</a>
+          <a href={`#delete-${record.id}`}>Delete</a>
         </Space>
       ),
     },
