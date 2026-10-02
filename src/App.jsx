@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router";
 import MainLayout from "./layouts/MainLayout.jsx";
 // import Navbar from "./components/Navbar.jsx";
-import Sidebar from "./components/Sidebar.jsx";
+import Sidebar from "./components/Navigation.jsx";
 import StatusBadge from "./components/StatusBadge.jsx";
 import CategoriesPage from "./pages/CategoriesPage.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
