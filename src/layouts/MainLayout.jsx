@@ -42,7 +42,7 @@ function MainLayout() {
         width={220}
         style={{ background: "#001529" }}
       >
-        <Sidebar isCollapsed={collapsed} />
+        <Navigation isCollapsed={collapsed} />
       </Sider>
 
       <Layout>

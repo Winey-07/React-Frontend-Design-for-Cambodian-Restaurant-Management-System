@@ -17,6 +17,8 @@ export default function Menu() {
     category: "Rice",
     price: "",
     status: "Available",
+    image: null,
+
   });
 
   // Build filter chip list from the data itself
