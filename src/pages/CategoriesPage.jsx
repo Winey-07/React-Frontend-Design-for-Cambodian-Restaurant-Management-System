@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { categories as initialCategories } from "../data/mockData.js";
+import { useEffect, useState } from "react";
 import Modal from "../components/Modal.jsx";
+import { getCategories } from "../api/categoryApi.js";
 
 export default function Categories() {
-  const [categories, setCategories] = useState(initialCategories);
+  const [categories, setCategories] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null);
@@ -42,6 +42,25 @@ export default function Categories() {
     setIsDeleteOpen(false);
   };
 
+  const getDatas = async () => {
+    const categoryData = await getCategories();
+    // console.log(categoryData);
+
+    setCategories(categoryData?.data);
+  }
+
+
+  useEffect(() => {
+    // 1. Setup code (runs here)
+    getDatas();
+    
+    
+
+    return () => {
+      // 2. Cleanup code (optional, runs before next effect or on unmount)
+    };
+  }, [/* 3. Dependency array */]);
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
@@ -54,7 +73,7 @@ export default function Categories() {
         </button>
       </div>
 
-      {categories.length === 0 ? (
+      {categories?.length === 0 ? (
         <div className="bg-white rounded-xl p-12 text-center">
           <p className="text-gray-500">
             No categories yet. Click "+ Add Category" to create one.
@@ -62,7 +81,7 @@ export default function Categories() {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {categories.map((cat) => (
+          {categories?.map((cat) => (
             <div
               key={cat.id}
               className="bg-white rounded-xl shadow-sm p-5 hover:shadow-md transition-shadow"
