@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Outlet, useLocation, Link } from "react-router";
 import { Layout, Typography, Breadcrumb } from "antd";
-import Sidebar from "../components/Sidebar.jsx";
+import Navigation from "../components/Navigation.jsx";
 
 const { Header, Content, Sider } = Layout;
 const { Text } = Typography;
@@ -48,18 +48,45 @@ function MainLayout() {
       <Layout>
         <Header
           style={{
-            background: "#fff",
             padding: "0 24px",
+            background: "#ffffff",
             display: "flex",
             alignItems: "center",
+            justifyContent: "space-between",
+            borderBottom: "1px solid #e8e8e8",
+            height: 56,
+            lineHeight: "56px",
           }}
         >
-          <Breadcrumb items={breadcrumbItems} />
+          <div
+            className="window-controls"
+            aria-hidden="true"
+            style={{ display: "flex", gap: 8, alignItems: "center" }}
+          >
+            <span className="window-dot red" />
+            <span className="window-dot yellow" />
+            <span className="window-dot green" />
+          </div>
+          <Text type="secondary" style={{ fontSize: 13, fontWeight: 500 }}>
+            Sery Mom Resturant • Logo
+          </Text>
         </Header>
 
         <Content style={{ padding: "24px", background: "#f5f5f5" }}>
-          {/* Outlet is mandatory for React Router layout nesting */}
-          <Outlet />
+          <Breadcrumb items={breadcrumbItems} style={{ marginBottom: 16 }} />
+          <div
+            className="content-surface"
+            style={{
+              padding: 28,
+              background: "#ffffff",
+              borderRadius: 10,
+              minHeight: "calc(100vh - 180px)",
+              boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+            }}
+          >
+            {/* Outlet is mandatory for React Router layout nesting */}
+            <Outlet />
+          </div>
         </Content>
       </Layout>
     </Layout>

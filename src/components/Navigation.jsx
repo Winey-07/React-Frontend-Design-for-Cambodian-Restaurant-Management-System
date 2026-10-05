@@ -55,7 +55,7 @@ function Navigation({ isCollapsed }) {
       navigate("/log-out");
       return;
     }
-    if (key.startsWith("/")) navigate(key);
+    if (key.startsWith("/")) navigate(key); 
   };
 
   return (
