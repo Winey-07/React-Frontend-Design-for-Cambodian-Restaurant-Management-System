@@ -30,9 +30,9 @@ function App() {
             index
             element={<p>Select All Order or Create Order from the sidebar.</p>}
           />
-          <Route path="order" element={<OrderPage />} />
-          <Route path="order/create-order" element={<CreateOrderPage />} />
-          <Route path="order/:id" element={<OrderDetailPage />} />
+          <Route path="/orders-group/order" element={<OrderPage />} />
+          <Route path="/orders-group/order/create" element={<CreateOrderPage />} />
+          <Route path="/orders-group/order/:id" element={<OrderDetailPage />} />
         </Route>
       </Route>
     </Routes>

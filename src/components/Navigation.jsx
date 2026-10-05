@@ -29,7 +29,7 @@ function Navigation({ isCollapsed }) {
           label: "All Orders" 
         },
         {
-          key: "/orders-group/order/create-order",
+          key: "/orders-group/order/create",
           icon: <PlusOutlined />,
           label: "Create Order",
         },
