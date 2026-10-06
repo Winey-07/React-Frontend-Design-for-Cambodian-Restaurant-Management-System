@@ -43,7 +43,7 @@ function Navigation({ isCollapsed }) {
 
   const handleMenuClick = ({ key }) => {
     if (key === "logout") {
-      navigate("/log-out");
+      navigate("/");
       return;
     }
     if (key.startsWith("/")) navigate(key);

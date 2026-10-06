@@ -15,6 +15,8 @@ const TableCard = ({ table, onClick, getStatusColor }) => {
       <Tag color={getStatusColor(table.status)}>{table.status}</Tag>
     </Card>
   );
+  
+
 };
 
 export default TableCard;
