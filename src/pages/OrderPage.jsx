@@ -112,9 +112,12 @@ function OrderPage() {
   };
 
   // Run the fetch when this page loads.
-  useEffect(() => {
+  // Run the fetch when this page loads.
+useEffect(() => {
+  setTimeout(() => {
     getOrders();
-  }, []);
+  }, 0);
+}, []);
 
   // =========================
   // TABLE COLUMNS
@@ -213,7 +216,7 @@ function OrderPage() {
   ];
 
   return (
-    <div style={{ padding: "24px", maxWidth: "1200px", margin: "0 auto" }}>
+    <div style={{ padding: "10px", maxWidth: "90%", margin: "0 auto" }}>
       <h1
         style={{
           marginBottom: "20px",
