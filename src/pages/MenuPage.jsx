@@ -2,6 +2,12 @@ import { useState } from "react";
 import { menuItems as initialItems } from "../data/mockData.js";
 import StatusBadge from "../components/StatusBadge.jsx";
 import Modal from "../components/Modal.jsx";
+import {
+  getMenuItems,
+  createMenuItems,
+  updateMenuItems,
+  deleteMenuItems,
+} from "../api/menuApi.js";
 
 export default function Menu() {
   // --- STATE: the data the page remembers ---
@@ -18,7 +24,6 @@ export default function Menu() {
     price: "",
     status: "Available",
     image: null,
-
   });
 
   // Build filter chip list from the data itself
