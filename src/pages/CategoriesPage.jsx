@@ -2,16 +2,59 @@ import { useState, useEffect } from "react";
 import { menuItems as initialItems } from "../data/mockData.js";
 import StatusBadge from "../components/StatusBadge.jsx";
 import Modal from "../components/Modal.jsx";
-import { getCategories, createCategory, updateCategory, deleteCategory } from "../api/categoryApi.js";
 
-export default function Categories() {
-  const [categories, setCategories] = useState();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [editingCategory, setEditingCategory] = useState(null);
-  const [deletingId, setDeletingId] = useState(null);
-  const [name, setName] = useState("");
 
+export default function CreateOrderPage() {
+  // --- STATE: the data the page remembers ---
+  const [items, setItems] = useState(initialItems); // list of food
+  // state to store API data
+  const [search, setSearch] = useState(""); // search box text
+  const [activeFilter, setActiveFilter] = useState("All"); // selected category chip
+  const [isModalOpen, setIsModalOpen] = useState(false); // add/edit modal
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false); // delete confirm modal
+  const [editingItem, setEditingItem] = useState(null); // item being edited (null = adding new)
+  const [deletingId, setDeletingId] = useState(null); // id of item to delete
+  
+  const [form, setForm] = useState({
+    name: "",
+    category: "Rice",
+    price: "",
+    status: "Available",
+  });
+
+  const getDatas = async () => {
+    try {
+      const orderData = await getOrders();
+      const list = orderData?.data || orderData;
+      setOrderDatas(list);
+      // If the API returns food/menu items, populate items with the fetched data:
+      if (Array.isArray(list) && list.length > 0) {
+        setItems(list);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  // Call the API function when the page loads
+  useEffect(() => {
+    getDatas();
+  }, []);
+
+  // Build filter chip list from the data itself
+  const filters = ["All", ...new Set(items.map((i) => i.category))];
+
+  // --- FILTERING: apply search + category, then show result ---
+  const filtered = items.filter((item) => {
+    const matchSearch = item.name.toLowerCase().includes(search.toLowerCase());
+    const matchFilter =
+      activeFilter === "All" || item.category === activeFilter;
+    return matchSearch && matchFilter;
+  });
+
+  // --- HANDLERS: functions that run when user does something ---
+
+  // Open modal in "Add" mode
   const openAdd = () => {
     setEditingItem(null);
     setForm({ name: "", category: "Rice", price: "", status: "Available" });
