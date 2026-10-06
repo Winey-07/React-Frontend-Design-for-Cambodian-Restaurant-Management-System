@@ -5,4 +5,4 @@ function OrderLayout () {
   return <Outlet />
 }
 
-export default OrderLayout
+export default OrderLayout;

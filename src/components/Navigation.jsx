@@ -10,6 +10,7 @@ import {
   CreditCardOutlined,
   BarChartOutlined,
   LogoutOutlined,
+  EyeOutlined,
 } from "@ant-design/icons";
 
 function Navigation({ isCollapsed }) {
@@ -23,11 +24,19 @@ function Navigation({ isCollapsed }) {
       icon: <PlusCircleOutlined />,
       label: "Orders",
       children: [
-        { key: "/order", icon: <PlusCircleOutlined />, label: "All Orders" },
+        { key: "/orders-group/order", 
+          icon: <PlusCircleOutlined />, 
+          label: "All Orders" 
+        },
         {
-          key: "/order/create-order",
+          key: "/orders-group/order/create",
           icon: <PlusOutlined />,
           label: "Create Order",
+        },
+        {
+          key: "/orders-group/order/:id",
+          icon: <EyeOutlined />,
+          label: "Order detail ",
         },
       ],
     },
@@ -46,7 +55,7 @@ function Navigation({ isCollapsed }) {
       navigate("/");
       return;
     }
-    if (key.startsWith("/")) navigate(key);
+    if (key.startsWith("/")) navigate(key); 
   };
 
   return (
