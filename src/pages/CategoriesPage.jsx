@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import Modal from "../components/Modal.jsx";
-import { getCategories, createCategory, updateCategory, deleteCategory } from "../api/categoryApi.js";
+import {
+  getCategories,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+} from "../api/categoryApi.js";
 
 export default function Categories() {
   const [categories, setCategories] = useState();
@@ -37,41 +42,62 @@ export default function Categories() {
   //   setIsModalOpen(false);
   // };
 
-  // const handleSave = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     if (editingCategory){
-  //       a
-  //     }
-  //   }
-  //   catch (error) {
+  // const handleDelete = () => {
+  //   setCategories(categories.filter((c) => c.id !== deletingId));
+  //   setIsDeleteOpen(false);
+  // };
 
-  //   }
-  // }
+  const handleSave = async (e) => {
+    e.preventDefault();
+    try {
+      if (editingCategory) {
+        await updateCategory(editingCategory.id, name);
+      } else {
+        await createCategory(name);
+      }
+      await getDatas();
 
-  const handleDelete = () => {
-    setCategories(categories.filter((c) => c.id !== deletingId));
-    setIsDeleteOpen(false);
+      setIsModalOpen(false); // ?
+    } catch (err) {
+      console.error("Save failed: ", err);
+    }
   };
 
+  const handleDelete = async () => {
+    try {
+      await deleteCategory(deletingId);
+      await getDatas();
+
+      setIsDeleteOpen(false); // ?
+    } catch (err) {
+      console.error("Delete failed: ", err);
+    }
+  };
+
+ 
+
   const getDatas = async () => {
-    const categoryData = await getCategories();
-    // console.log(categoryData);
+    try {
+      const categoryData = await getCategories();
+      setCategories(categoryData?.data ?? []);
+    } catch (err) {
+      console.error("Failed to load catefgories: ", err);
+      setCategories([]);
+    }
+  };
+  useEffect(
+    () => {
+      // 1. Setup code (runs here)
+      getDatas();
 
-    setCategories(categoryData?.data);
-  }
-
-
-  useEffect(() => {
-    // 1. Setup code (runs here)
-    getDatas();
-    
-    
-
-    return () => {
-      // 2. Cleanup code (optional, runs before next effect or on unmount)
-    };
-  }, [/* 3. Dependency array */]);
+      return () => {
+        // 2. Cleanup code (optional, runs before next effect or on unmount)
+      };
+    },
+    [
+      /* 3. Dependency array */
+    ],
+  );
 
   return (
     <div>
