@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import Modal from "../components/Modal.jsx";
 import {
   getCategories,
-  createCategory,
-  updateCategory,
-  deleteCategory,
+  createCategories,
+  updateCategories,
+  deleteCategories,
 } from "../api/categoryApi.js";
 
 export default function Categories() {
-  const [categories, setCategories] = useState();
+  // FIX #1: Initialize with empty array [] instead of undefined
+  const [categories, setCategories] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null);
@@ -27,37 +28,16 @@ export default function Categories() {
     setIsModalOpen(true);
   };
 
-  // const handleSave = (e) => {
-  //   e.preventDefault();
-  //   if (editingCategory) {
-  //     setCategories(
-  //       categories.map((c) =>
-  //         c.id === editingCategory.id ? { ...c, name } : c,
-  //       ),
-  //     );
-  //   } else {
-  //     const newId = Math.max(...categories.map((c) => c.id), 0) + 1;
-  //     setCategories([...categories, { id: newId, name, itemCount: 0 }]);
-  //   }
-  //   setIsModalOpen(false);
-  // };
-
-  // const handleDelete = () => {
-  //   setCategories(categories.filter((c) => c.id !== deletingId));
-  //   setIsDeleteOpen(false);
-  // };
-
   const handleSave = async (e) => {
     e.preventDefault();
     try {
       if (editingCategory) {
-        await updateCategory(editingCategory.id, name);
+        await updateCategories(editingCategory.id, name);
       } else {
-        await createCategory(name);
+        await createCategories(name);
       }
       await getDatas();
-
-      setIsModalOpen(false); // ?
+      setIsModalOpen(false);
     } catch (err) {
       console.error("Save failed: ", err);
     }
@@ -65,39 +45,30 @@ export default function Categories() {
 
   const handleDelete = async () => {
     try {
-      await deleteCategory(deletingId);
+      await deleteCategories(deletingId);
       await getDatas();
-
-      setIsDeleteOpen(false); // ?
+      setIsDeleteOpen(false);
     } catch (err) {
       console.error("Delete failed: ", err);
     }
   };
 
- 
-
   const getDatas = async () => {
     try {
       const categoryData = await getCategories();
-      setCategories(categoryData?.data ?? []);
+      // Support both res.data and raw array responses
+      setCategories(categoryData?.data ?? categoryData ?? []);
     } catch (err) {
-      console.error("Failed to load catefgories: ", err);
+      // FIX #2: Typo "catefgories" → "categories"
+      console.error("Failed to load categories: ", err);
       setCategories([]);
     }
   };
-  useEffect(
-    () => {
-      // 1. Setup code (runs here)
-      getDatas();
 
-      return () => {
-        // 2. Cleanup code (optional, runs before next effect or on unmount)
-      };
-    },
-    [
-      /* 3. Dependency array */
-    ],
-  );
+  // FIX #3: Simplified useEffect — removed unnecessary cleanup
+  useEffect(() => {
+    getDatas();
+  }, []);
 
   return (
     <div>
@@ -111,7 +82,8 @@ export default function Categories() {
         </button>
       </div>
 
-      {categories?.length === 0 ? (
+      {/* FIX #1: Now that categories is initialized as [], this check works correctly */}
+      {categories.length === 0 ? (
         <div className="bg-white rounded-xl p-12 text-center">
           <p className="text-gray-500">
             No categories yet. Click "+ Add Category" to create one.
@@ -119,7 +91,7 @@ export default function Categories() {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {categories?.map((cat) => (
+          {categories.map((cat) => (
             <div
               key={cat.id}
               className="bg-white rounded-xl shadow-sm p-5 hover:shadow-md transition-shadow"
@@ -127,7 +99,8 @@ export default function Categories() {
               <div className="flex items-center justify-between">
                 <p className="font-semibold text-[#2C3E50]">{cat.name}</p>
                 <span className="text-xs bg-[#F8F9FA] text-gray-500 px-2 py-1 rounded-full">
-                  {cat.itemCount} items
+                  {/* FIX #4: Default to 0 if itemCount is missing */}
+                  {cat.itemCount || 0} items
                 </span>
               </div>
               <div className="flex gap-3 mt-4">

@@ -6,7 +6,7 @@ export const getCategories = async () => {
   return data;
 };
 // Create
-export const createCategory = async (name) => {
+export const createCategories = async (name) => {
   const response = await fetch(`${API_BASE_URL}/categories`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -16,7 +16,7 @@ export const createCategory = async (name) => {
   return data;
 };
 // update
-export const updateCatgory = async (id, name) => {
+export const updateCategories = async (id, name) => {
   const response = await fetch(`${API_BASE_URL}/categories/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -27,7 +27,7 @@ export const updateCatgory = async (id, name) => {
 };
 
 // Delete
-export const deleteCategory = async (id) => {
+export const deleteCategories = async (id) => {
   const response = await fetch(`${API_BASE_URL}/categories/${id}`, {
     method: "DELETE",
   });

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
-import MainLayout from "../layouts/MainLayout.jsx";
+
+
 import StatusBadge from "../components/StatusBadge.jsx";
 
 const getDashboardSummary = () =>
@@ -57,7 +58,7 @@ function Dashboard() {
         setRecentOrders(ordersDate);
         setPopularFood(popularDate);
         setError(null);
-      } catch (err) {
+      } catch {
         setError("Failed to load dashboard.");
       } finally {
         // finally runs no matter what, success or failure.
