@@ -18,15 +18,16 @@ function Navigation({ isCollapsed }) {
   const navigate = useNavigate();
 
   const menuItems = [
-    { key: "/", icon: <HomeOutlined />, label: "Dashboard" },
+    { key: "/dashboard", icon: <HomeOutlined />, label: "Dashboard" },
     {
       key: "orders-group",
       icon: <PlusCircleOutlined />,
       label: "Orders",
       children: [
-        { key: "/orders-group/order", 
-          icon: <PlusCircleOutlined />, 
-          label: "All Orders" 
+        {
+          key: "/orders-group/order",
+          icon: <PlusCircleOutlined />,
+          label: "All Orders",
         },
         {
           key: "/orders-group/order/create",
@@ -55,7 +56,7 @@ function Navigation({ isCollapsed }) {
       navigate("/log-out");
       return;
     }
-    if (key.startsWith("/")) navigate(key); 
+    if (key.startsWith("/")) navigate(key);
   };
 
   return (
