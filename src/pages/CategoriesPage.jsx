@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Modal from "../components/Modal.jsx";
-import { getCategories } from "../api/categoryApi.js";
+import { getCategories, createCategory, updateCategory, deleteCategory } from "../api/categoryApi.js";
 
 export default function Categories() {
   const [categories, setCategories] = useState();
@@ -22,20 +22,32 @@ export default function Categories() {
     setIsModalOpen(true);
   };
 
-  const handleSave = (e) => {
-    e.preventDefault();
-    if (editingCategory) {
-      setCategories(
-        categories.map((c) =>
-          c.id === editingCategory.id ? { ...c, name } : c,
-        ),
-      );
-    } else {
-      const newId = Math.max(...categories.map((c) => c.id), 0) + 1;
-      setCategories([...categories, { id: newId, name, itemCount: 0 }]);
-    }
-    setIsModalOpen(false);
-  };
+  // const handleSave = (e) => {
+  //   e.preventDefault();
+  //   if (editingCategory) {
+  //     setCategories(
+  //       categories.map((c) =>
+  //         c.id === editingCategory.id ? { ...c, name } : c,
+  //       ),
+  //     );
+  //   } else {
+  //     const newId = Math.max(...categories.map((c) => c.id), 0) + 1;
+  //     setCategories([...categories, { id: newId, name, itemCount: 0 }]);
+  //   }
+  //   setIsModalOpen(false);
+  // };
+
+  // const handleSave = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     if (editingCategory){
+  //       a
+  //     }
+  //   }
+  //   catch (error) {
+
+  //   }
+  // }
 
   const handleDelete = () => {
     setCategories(categories.filter((c) => c.id !== deletingId));
