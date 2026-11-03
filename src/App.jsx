@@ -9,6 +9,7 @@ import OrderDetailPage from "./pages/OrderDetailPage.jsx";
 import CreateOrderPage from "./pages/CreateOrderPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import OrderLayout from "./pages/OrderLayout.jsx";
+import TablePage from "./pages/TablePage.jsx";
 
 import "./index.css";
 
@@ -23,6 +24,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/category" element={<CategoriesPage />} />
         <Route path="/menu" element={<MenuPage />} />
+        <Route path="/table" element={<TablePage />} />
+
 
         {/* Order Routes */}
         <Route path="/orders-group" element={<OrderLayout />}>
